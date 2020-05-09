@@ -13,9 +13,10 @@ import store from './src/redux/store';
 import { NavigationContainer } from '@react-navigation/native';
 import Trivia from './src/features/Trivia';
 import QuestionDashboard from './src/features/QuestionDashboard';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
 const App: () => React$Node = () => {
   return (
@@ -28,8 +29,29 @@ const App: () => React$Node = () => {
               <Tab.Screen
                 name="QuestionDashboard"
                 component={QuestionDashboard}
+                options={{
+                  tabBarIcon: ({ color }) => (
+                    <MaterialCommunityIcons
+                      name="home"
+                      color={color}
+                      size={26}
+                    />
+                  ),
+                }}
               />
-              <Tab.Screen name="Trivia" component={Trivia} />
+              <Tab.Screen
+                name="Trivia"
+                component={Trivia}
+                options={{
+                  tabBarIcon: ({ color }) => (
+                    <MaterialCommunityIcons
+                      name="quora"
+                      color={color}
+                      size={26}
+                    />
+                  ),
+                }}
+              />
             </Tab.Navigator>
           </View>
         </SafeAreaView>
