@@ -6,6 +6,7 @@ const defaultStartState = {
   fetching: false,
   error: null,
   validAnswers: [],
+  notValidAnswers: [],
 };
 
 export default function trivia(state = defaultStartState, action) {
@@ -31,6 +32,13 @@ export default function trivia(state = defaultStartState, action) {
       newState.validAnswers = isTrue
         ? [...state.validAnswers, action.payload.answer]
         : [...state.validAnswers];
+      newState.notValidAnswers = !isTrue
+        ? [...state.notValidAnswers, action.payload.answer]
+        : [...state.notValidAnswers];
+      break;
+    case 'RESET_ANSWERS':
+      newState.validAnswers = [];
+      newState.notValidAnswers = [];
       break;
     default:
       return state;

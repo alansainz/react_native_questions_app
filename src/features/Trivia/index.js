@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import {
   getRandomQuestionsRequest,
   addAnswerToArray,
+  resetAnswersArrays,
 } from './redux/actions.js';
 import { Button } from './styles.js';
 import Card from './components/Card';
@@ -17,20 +18,23 @@ const Stack = createStackNavigator();
 const Trivia = () => {
   const trivia = useSelector(state => state.trivia);
   const dispatch = useDispatch();
-  const { randomQuestions, fetching, validAnswers } = trivia;
+  const { randomQuestions, fetching, validAnswers, notValidAnswers } = trivia;
 
   const selectAnswerAndAdvance = (isAnswerTrue, props) => {
     const nextQuestion = (Number(props.route.name) + 1).toString();
+
+    dispatch(addAnswerToArray(isAnswerTrue));
+
     if (nextQuestion > randomQuestions.length) {
       props.navigation.push(ResultScreen);
     } else {
-      dispatch(addAnswerToArray(isAnswerTrue));
       props.navigation.push(nextQuestion);
     }
   };
 
   const restartQuestions = props => {
     dispatch(getRandomQuestionsRequest());
+    dispatch(resetAnswersArrays());
     props.navigation.push('1');
   };
 
@@ -58,7 +62,10 @@ const Trivia = () => {
         {props => {
           return (
             <View>
-              <Result result={validAnswers.length} />
+              <Result
+                validAnswers={validAnswers.length}
+                notValidAnswers={notValidAnswers.length}
+              />
               <Button onPress={() => restartQuestions(props)}>
                 <Text>Answer more questions</Text>
               </Button>

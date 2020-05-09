@@ -1,6 +1,12 @@
 import React from 'react';
+import { View } from 'react-native';
 import { Text } from './styles.js';
 
-const Result = ({ result }) => <Text>Correct answers: {result}</Text>;
+const Result = ({ validAnswers, notValidAnswers }) => (
+  <View>
+    <Text>Correct answers: {validAnswers}</Text>
+    <Text>Incorrect answers: {notValidAnswers}</Text>
+  </View>
+);
 
 export default Result;

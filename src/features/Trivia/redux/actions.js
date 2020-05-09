@@ -4,6 +4,7 @@ import {
   GET_RANDOM_QUESTIONS_SUCCESS,
   GET_RANDOM_QUESTIONS_FAILURE,
   ADD_ANSWER,
+  RESET_ANSWERS,
 } from './constants';
 
 const getRandomQuestionsAttempt = () => ({
@@ -29,8 +30,16 @@ const addAnswer = answer => ({
   payload: { answer },
 });
 
+const resetAnswers = () => ({
+  type: RESET_ANSWERS,
+});
+
 export const addAnswerToArray = answer => dispatch => {
   return dispatch(addAnswer(answer));
+};
+
+export const resetAnswersArrays = () => dispatch => {
+  return dispatch(resetAnswers());
 };
 
 export const getRandomQuestionsRequest = () => dispatch => {
