@@ -1,20 +1,18 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
  * @format
  * @flow strict-local
  */
 
 import React from 'react';
-import { SafeAreaView, View, StatusBar } from 'react-native';
+import { SafeAreaView, StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
-import store from './src/redux/store';
 import { NavigationContainer } from '@react-navigation/native';
-import Trivia from './src/features/Trivia';
-import QuestionDashboard from './src/features/QuestionDashboard';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Container } from './styles.js';
+import Trivia from './src/features/Trivia';
+import QuestionDashboard from './src/features/QuestionDashboard';
+import store from './src/redux/store';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -24,7 +22,7 @@ const App: () => React$Node = () => {
       <Provider store={store}>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView>
-          <View style={{ height: '100%', backgroundColor: '#3685b5' }}>
+          <Container>
             <Tab.Navigator>
               <Tab.Screen
                 name="QuestionDashboard"
@@ -53,7 +51,7 @@ const App: () => React$Node = () => {
                 }}
               />
             </Tab.Navigator>
-          </View>
+          </Container>
         </SafeAreaView>
       </Provider>
     </NavigationContainer>
